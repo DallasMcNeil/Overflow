@@ -11,8 +11,6 @@ import Cocoa
 @NSApplicationMain
 class AppDelegate: NSObject, NSApplicationDelegate {
 
-    @IBOutlet weak var window: NSWindow!
-    
     /// Status bar item of the application
     var statusItem:NSStatusItem?
 
@@ -53,7 +51,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         statusItem!.image = NSImage(named: "recycle")
         
         // Create menu items for stauts bar
-        let title = NSMenuItem(title:"Overflow: Ver 1.1", action: nil, keyEquivalent: "")
+        let title = NSMenuItem(title:"Overflow: Ver 1.0", action: nil, keyEquivalent: "")
         let onOrOff = NSMenuItem(title: "Turn Overflow Off", action: Selector("turnOff:"), keyEquivalent: "")
         let about = NSMenuItem(title:"About", action: Selector("about:"), keyEquivalent: "")
         let quit = NSMenuItem(title:"Quit", action: Selector("quit:"), keyEquivalent: "")
@@ -110,8 +108,8 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     func about(sender:AnyObject) {
         let alert:NSAlert = NSAlert()
         alert.alertStyle = NSAlertStyle.InformationalAlertStyle
-        alert.informativeText = "Overflow treats your trash like it should be. Pile too much up and it's bound to fall out. Keep your trash under control or your dektop will be full of clutter. For best results add this application to your Login Items in System Preferences under the Users and Groups section. Made by Dallas McNeil"
-        alert.messageText = "Overflow Version 1.2"
+        alert.informativeText = "Overflow treats your trash like it should be. Pile too much up and it's bound to fall out. Keep your trash under control or your dektop will be full of clutter. For best results, add this application to your Login Items in System Preferences under the Users and Groups section. Made by Dallas McNeil"
+        alert.messageText = "Overflow Version 1.0"
         alert.runModal()
         
     }
