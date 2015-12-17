@@ -14,6 +14,8 @@ Files that have fallen out will be labeled as "CRUMPLED" so you know they have f
 
 Overflow reminds you to empty your trash every now and again to conserve storage space.
 
+Overflow is a menu bar application and can be disabled and terminated through the menu.
+
 # Building
 Overflow requires Xcode 7.x to build. All project files should be configured correctly.
 
