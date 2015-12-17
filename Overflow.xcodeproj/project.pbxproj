@@ -12,6 +12,7 @@
 		B510BECD1AFCE91900FC5603 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = B510BECB1AFCE91900FC5603 /* MainMenu.xib */; };
 		B510BED91AFCE91900FC5603 /* OverflowTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B510BED81AFCE91900FC5603 /* OverflowTests.swift */; };
 		B51D25341C224EC000430BA7 /* Overflow Example.gif in Resources */ = {isa = PBXBuildFile; fileRef = B51D25331C224EC000430BA7 /* Overflow Example.gif */; };
+		B54C97071C2294B500EF13B1 /* LICENSE.txt in Resources */ = {isa = PBXBuildFile; fileRef = B54C97061C2294B500EF13B1 /* LICENSE.txt */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -34,6 +35,7 @@
 		B510BED71AFCE91900FC5603 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B510BED81AFCE91900FC5603 /* OverflowTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OverflowTests.swift; sourceTree = "<group>"; };
 		B51D25331C224EC000430BA7 /* Overflow Example.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "Overflow Example.gif"; sourceTree = "<group>"; };
+		B54C97061C2294B500EF13B1 /* LICENSE.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE.txt; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -57,6 +59,7 @@
 		B510BEB91AFCE91900FC5603 = {
 			isa = PBXGroup;
 			children = (
+				B54C97061C2294B500EF13B1 /* LICENSE.txt */,
 				B510BEC41AFCE91900FC5603 /* Overflow */,
 				B510BED51AFCE91900FC5603 /* OverflowTests */,
 				B510BEC31AFCE91900FC5603 /* Products */,
@@ -191,6 +194,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B54C97071C2294B500EF13B1 /* LICENSE.txt in Resources */,
 				B510BECA1AFCE91900FC5603 /* Images.xcassets in Resources */,
 				B51D25341C224EC000430BA7 /* Overflow Example.gif in Resources */,
 				B510BECD1AFCE91900FC5603 /* MainMenu.xib in Resources */,

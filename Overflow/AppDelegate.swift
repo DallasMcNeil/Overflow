@@ -3,7 +3,6 @@
 //  Overflow
 //
 //  Created by Dallas McNeil on 8/05/2015.
-//  Copyright (c) 2015 Dallas McNeil. All rights reserved.
 //
 
 import Cocoa
@@ -130,7 +129,6 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             
                 // Calculate the chance that files will be moved based on current load
                 let theChance = Int(arc4random()%UInt32(maxLoad-minLoad))
-                print("\(theChance) < \(trashFiles.count-minLoad)")
                 if theChance < trashFiles.count-minLoad {
                     
                     // Multiplier based on the amount of files in the trash
