@@ -19,7 +19,7 @@ Overflow is a menu bar application and can be disabled and terminated through th
 # Building
 Overflow requires Xcode 7.x to build. All project files should be configured correctly.
 
-A prebuilt copy of Overflow will become available in the near future.
+A prebuilt copy of Overflow is available [here](http://www.dallasmcneil.com/downloads/Overflow.zip).
 
 # System requirements
 Requires OS X 10.8 or greater
