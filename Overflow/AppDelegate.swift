@@ -20,7 +20,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     var working:Bool = true
     
     /// File manager to manage trash and desktop files
-    var manager:NSFileManager = NSFileManager()
+    var manager:FileManager = FileManager()
     
     /// List of files located inside the trash folder
     var files:[NSString] = []
@@ -41,72 +41,72 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     var magnitude:Int = 10
     
     /// Time between each update to check for trash changing. Smaller time intervals will cause worse performance
-    let updateTime:NSTimeInterval = 1
+    let updateTime:TimeInterval = 1
     
-    func applicationDidFinishLaunching(aNotification: NSNotification) {
+    func applicationDidFinishLaunching(_ aNotification: Notification) {
         
         // Create status bar with icon
-        statusItem = NSStatusBar.systemStatusBar().statusItemWithLength(24)
+        statusItem = NSStatusBar.system().statusItem(withLength: 24)
         statusItem!.image = NSImage(named: "recycle")
         
         // Create menu items for stauts bar
         let title = NSMenuItem(title:"Overflow: Ver 1.0", action: nil, keyEquivalent: "")
-        let onOrOff = NSMenuItem(title: "Turn Overflow Off", action: Selector("turnOff:"), keyEquivalent: "")
-        let about = NSMenuItem(title:"About", action: Selector("about:"), keyEquivalent: "")
-        let quit = NSMenuItem(title:"Quit", action: Selector("quit:"), keyEquivalent: "")
+        let onOrOff = NSMenuItem(title: "Turn Overflow Off", action: #selector(AppDelegate.turnOff(_:)), keyEquivalent: "")
+        let about = NSMenuItem(title:"About", action: #selector(AppDelegate.about(_:)), keyEquivalent: "")
+        let quit = NSMenuItem(title:"Quit", action: #selector(AppDelegate.quit(_:)), keyEquivalent: "")
 
         // Add menu items to menu
         menu.addItem(title)
-        menu.addItem(NSMenuItem.separatorItem())
+        menu.addItem(NSMenuItem.separator())
         menu.addItem(onOrOff)
-        menu.addItem(NSMenuItem.separatorItem())
-        menu.addItem(NSMenuItem.separatorItem())
+        menu.addItem(NSMenuItem.separator())
+        menu.addItem(NSMenuItem.separator())
         menu.addItem(about)
         menu.addItem(quit)
-        NSWorkspace.sharedWorkspace()
+        NSWorkspace.shared()
         // Set menu to be status bars menu
         statusItem!.menu = menu
         
         // Get path of all files in trash
-        let tempFiles = (try! manager.contentsOfDirectoryAtPath(trashPath))
+        let tempFiles = (try! manager.contentsOfDirectory(atPath: trashPath))
         for file in tempFiles {
             files.append(NSString(string:file))
         }
         
         // Set a timer to call 'update' after a period of time
-        NSTimer.scheduledTimerWithTimeInterval(updateTime, target: self, selector: Selector("update"), userInfo: nil, repeats: true)
+        Timer.scheduledTimer(timeInterval: updateTime, target: self, selector: #selector(AppDelegate.update), userInfo: nil, repeats: true)
         
     }
 
-    func applicationWillTerminate(aNotification: NSNotification) {
+    func applicationWillTerminate(_ aNotification: Notification) {
         // Insert code here to tear down your application
     }
     
     /// Disable overflow taking action
-    func turnOff(sender:AnyObject) {
-        let item = menu.itemWithTitle("Turn Overflow Off")
+    func turnOff(_ sender:AnyObject) {
+        let item = menu.item(withTitle: "Turn Overflow Off")
         item!.title = "Turn Overflow On"
-        item!.action = Selector("turnOn:")
+        item!.action = #selector(AppDelegate.turnOn(_:))
         working = false
     }
     
     /// Enable overflow taking action
-    func turnOn(sender:AnyObject) {
-        let item = menu.itemWithTitle("Turn Overflow On")
+    func turnOn(_ sender:AnyObject) {
+        let item = menu.item(withTitle: "Turn Overflow On")
         item!.title = "Turn Overflow Off"
-        item!.action = Selector("turnOff:")
+        item!.action = #selector(AppDelegate.turnOff(_:))
         working = true
     }
     
     /// Quit the application
-    func quit(sender:AnyObject) {
-        NSApplication.sharedApplication().terminate(self)
+    func quit(_ sender:AnyObject) {
+        NSApplication.shared().terminate(self)
     }
     
     /// Present information about Overflow
-    func about(sender:AnyObject) {
+    func about(_ sender:AnyObject) {
         let alert:NSAlert = NSAlert()
-        alert.alertStyle = NSAlertStyle.InformationalAlertStyle
+        alert.alertStyle = NSAlertStyle.informational
         alert.informativeText = "Overflow treats your trash like it should be. Pile too much up and it's bound to fall out. Keep your trash under control or your dektop will be full of clutter. For best results, add this application to your Login Items in System Preferences under the Users and Groups section. Made by Dallas McNeil"
         alert.messageText = "Overflow Version 1.0"
         alert.runModal()
@@ -121,7 +121,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             
             // Check files in trash and see if there are more than before
             var trashFiles:[NSString] = []
-            var tempFiles = (try! manager.contentsOfDirectoryAtPath(trashPath))
+            var tempFiles = (try! manager.contentsOfDirectory(atPath: trashPath))
             for file in tempFiles {
                 trashFiles.append(NSString(string:file))
             }
@@ -141,7 +141,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
                     let theMagnitude = Int(arc4random()%UInt32(magnitude*multiplier))
                     print(theMagnitude)
                     // Choose randomly which files will be moved by sorting files randomly and picking first ones
-                    trashFiles = trashFiles.sort {_, _ in arc4random() % 2 == 0}
+                    trashFiles = trashFiles.sorted {_, _ in arc4random() % 2 == 0}
 
                     // Use index to manage how many files have moved and stop if exceeded
                     var currentIndex = 0
@@ -159,15 +159,15 @@ class AppDelegate: NSObject, NSApplicationDelegate {
                     
                             // Try to move file and if not possible, print error
                             do {
-                                try manager.moveItemAtPath("\(trashPath)/\(file)", toPath: "\(desktopPath)/CRUMPLED-\(file)")
+                                try manager.moveItem(atPath: "\(trashPath)/\(file)", toPath: "\(desktopPath)/CRUMPLED-\(file)")
                             } catch let error as NSError {
                                 print(error)
                             }
                             
-                            NSWorkspace.sharedWorkspace()
+                            NSWorkspace.shared()
                             
                             // Iterate current index to represent move
-                            currentIndex++
+                            currentIndex += 1
                             
                         }
                     }
@@ -175,7 +175,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
                 
                 // Update files to represent changes to trash
                 files = []
-                tempFiles = (try! manager.contentsOfDirectoryAtPath(trashPath))
+                tempFiles = (try! manager.contentsOfDirectory(atPath: trashPath))
                 for file in tempFiles {
                     files.append(NSString(string:file))
                 }
